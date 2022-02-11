@@ -6,7 +6,8 @@ COPY requirements.txt .
 
 RUN apt update && \
     apt upgrade -y && \
-    python3 -m pip install --upgrade pip && \
+    python -m venv venv && \
+    python -m pip install --upgrade pip --user && \
     pip install -r requirements.txt && \
 
 COPY . .
