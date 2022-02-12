@@ -13,9 +13,9 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
-      - ./app/backend/.env
+      - .env
   backend:
-    image: quantumcon/foodgram-project:backendV1.0
+    image: quantumcon/foodgram-project:backendV1.1
     restart: always
     volumes:
       - static_value:/app/staticfiles/
@@ -23,7 +23,7 @@ services:
     depends_on:
       - db
     env_file:
-      - ./app/backend/.env
+      - .env
   frontend:
     build:
       context: ../frontend
