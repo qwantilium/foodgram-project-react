@@ -1,11 +1,11 @@
 from djoser.serializers import UserCreateSerializer, UserSerializer
 from drf_extra_fields.fields import Base64ImageField
-
 from rest_framework.serializers import (ModelSerializer, ReadOnlyField,
                                         SerializerMethodField, ValidationError)
 
-from recipes.models import (User, Favorite, Ingredient, Recipe, RecipeIngredient,
-                            ShoppingCart, Subscription, Tag)
+from recipes.models import (User, Favorite, Ingredient, Recipe,
+                            RecipeIngredient, ShoppingCart,
+                            Subscription, Tag)
 
 
 class CustomUserCreateSerializer(UserCreateSerializer):
