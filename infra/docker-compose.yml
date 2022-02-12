@@ -26,7 +26,7 @@ services:
       - .env
   frontend:
     build:
-      context: ./app/frontend
+      context: ../frontend
       dockerfile: Dockerfile
     volumes:
       - ../frontend/:/app/result_build/
