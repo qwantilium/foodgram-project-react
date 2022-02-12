@@ -4,11 +4,7 @@ WORKDIR /app
 
 COPY requirements.txt .
 
-RUN apt update && \
-    apt upgrade -y && \
-    python -m venv venv && \
-    python -m pip install --upgrade pip --user && \
-    pip install -r requirements.txt && \
+RUN pip install -r requirements.txt --no-cache-dir
 
 COPY . .
 

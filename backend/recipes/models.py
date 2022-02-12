@@ -34,6 +34,7 @@ class Subscription(models.Model):
     def __str__(self):
         return '{} - {}'.format(self.user, self.author)
 
+
 class Ingredient(models.Model):
     name = models.CharField(
         max_length=200,

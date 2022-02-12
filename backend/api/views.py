@@ -17,9 +17,8 @@ from .serializers import (CustomUserSerializer, IngredientSerializer,
                           RecipeMinifiedSerializer, RecipeSerializer,
                           SubscriptionSerializer, TagSerializer)
 
-from recipes.models import (Favorite, Ingredient, Recipe,  # isort:skip
-                            RecipeIngredient, ShoppingCart, Tag)
-from users.models import Subscription, User  # isort:skip
+from recipes.models import (Favorite, Ingredient, Recipe,
+                            RecipeIngredient, ShoppingCart, Tag, Subscription, User)
 
 
 class CustomUserViewSet(UserViewSet):

@@ -15,11 +15,11 @@ services:
     env_file:
       - ../backend/.env
   backend:
-    image: quantumcon/foodgram_project:backendV1.0
+    image: quantumcon/foodgram-project:backendV1.0
     restart: always
     volumes:
-      - static_value:/app/static/
-      - media_value:/app/media/
+      - static_value:/app/staticfiles/
+      - media_value:/app/mediafiles/
     depends_on:
       - db
     env_file:
