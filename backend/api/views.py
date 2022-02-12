@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
 from djoser.views import UserViewSet
+from recipes.models import (Favorite, Ingredient, Recipe, RecipeIngredient,
+                            ShoppingCart, Subscription, Tag, User)
 from rest_framework import status
 from rest_framework.decorators import action
 from rest_framework.generics import ListAPIView
@@ -16,10 +18,6 @@ from .permissions import IsAuthor, IsReadOnly
 from .serializers import (CustomUserSerializer, IngredientSerializer,
                           RecipeMinifiedSerializer, RecipeSerializer,
                           SubscriptionSerializer, TagSerializer)
-
-from recipes.models import (User, Favorite, Ingredient, Recipe,
-                            RecipeIngredient, ShoppingCart,
-                            Tag, Subscription)
 
 
 class CustomUserViewSet(UserViewSet):
