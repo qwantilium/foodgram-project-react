@@ -26,7 +26,7 @@ services:
       - .env
   frontend:
     build:
-      context: ./frontend
+      context: foodgram-project-react-master/frontend
       dockerfile: Dockerfile
     volumes:
       - ./frontend/:/app/result_build/
