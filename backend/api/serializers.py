@@ -66,8 +66,9 @@ class RecipeSerializer(ModelSerializer):
 
     class Meta:
         model = Recipe
-        fields = ('id', 'tags', 'author', 'ingredients', 'is_favorited',
-                  'is_in_shopping_cart', 'name', 'image', 'text',
+        fields = ('id', 'tags', 'author',  'name', 'image', 'text',
+                  'ingredients', 'is_favorited',
+                  'is_in_shopping_cart',
                   'cooking_time')
 
     def get_is_favorited(self, recipe):
@@ -84,38 +85,38 @@ class RecipeSerializer(ModelSerializer):
 
     def validate_ingredients(self, ingredients):
         if not ingredients:
-            raise ValidationError('В рецепте не заполнены ингредиенты!')
+            raise ValidationError('Нужны ингредиенты!')
         return ingredients
 
     def validate_tags(self, tags):
         if not tags:
-            raise ValidationError('В рецепте не заполнены теги!')
+            raise ValidationError('Нужны теги!')
         return tags
 
     def validate_image(self, image):
         if not image:
-            raise ValidationError('Добавьте картинку рецепта!')
+            raise ValidationError('Нужно картинку рецепта!')
         return image
 
     def validate_name(self, name):
         if not name:
-            raise ValidationError('Не заполнено название рецепта!')
+            raise ValidationError('Нужно название рецепта!')
         if self.context.get('request').method == 'POST':
             current_user = self.context.get('request').user
             if Recipe.objects.filter(author=current_user, name=name).exists():
                 raise ValidationError(
-                    'Рецепт с таким названием у вас уже есть!'
+                    'Такое название уже есть!'
                 )
         return name
 
     def validate_text(self, text):
         if not text:
-            raise ValidationError('Не заполнено описание рецепта!')
+            raise ValidationError('Нужно описание рецепта!')
         return text
 
     def validate_cooking_time(self, cooking_time):
         if not cooking_time:
-            raise ValidationError('Не заполнено время приготовления рецепта!')
+            raise ValidationError('Нужно время приготовления рецепта!')
         return cooking_time
 
     def create_recipe_ingredients(self, ingredients, recipe):

@@ -37,14 +37,14 @@ class CustomUserViewSet(UserViewSet):
         author = get_object_or_404(User, id=id)
         if user == author:
             return Response(
-                {'Нельзя подписаться на самого себя!'},
+                {'Сам на себя не подписывайся, нельзя'},
                 status=status.HTTP_400_BAD_REQUEST
             )
         if Subscription.objects.filter(
                 user=user, author=author
         ).exists():
             return Response(
-                {'Нельзя подписаться повторно!'},
+                {'Вы уже подписаны'},
                 status=status.HTTP_400_BAD_REQUEST
             )
         Subscription.objects.create(
@@ -68,7 +68,7 @@ class CustomUserViewSet(UserViewSet):
             subscription.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(
-            {'Попытка удалить несуществующую подписку!'},
+            {'У вас нет этой подписки'},
             status=status.HTTP_400_BAD_REQUEST
         )
 
