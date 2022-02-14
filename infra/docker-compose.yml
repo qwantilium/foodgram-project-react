@@ -13,17 +13,17 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
-      - foodgram-project-react/backend/.env
+      - ../backend/.env
   backend:
     image: quantumcon/foodgram-project:backendV1.1
     restart: always
     volumes:
       - static_value:/app/staticfiles/
-      - media_value:/app/mediafiles/
+      - media_value:/app/media/
     depends_on:
       - db
     env_file:
-      - foodgram-project-react/backend/.env
+      - ../backend/.env
   frontend:
     build:
       context: ../frontend
