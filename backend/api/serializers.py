@@ -120,12 +120,15 @@ class RecipeSerializer(ModelSerializer):
         return cooking_time
 
     def create_recipe_ingredients(self, ingredients, recipe):
-        for i in ingredients:
-            RecipeIngredient.objects.bulk_create(
+        obj = [
+            RecipeIngredient(
                 recipe=recipe,
                 ingredient_id=i.get('id'),
                 amount=i.get('amount'),
             )
+            for i in ingredients
+        ]
+        RecipeIngredient.objects.bulk_create(obj)
 
     @transaction.atomic
     def create(self, validated_data):
