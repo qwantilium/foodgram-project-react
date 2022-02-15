@@ -12,18 +12,13 @@ POSTGRES_PASSWORD='пароль пользователя'
 DB_HOST='хост'
 DB_PORT='порт'
 ```
-### Как запустить проект:
+### Как запустить проект локально:
 
 Клонировать репозиторий и перейти в него в командной строке:
 
 ```
-git clone https://github.com/qwantilium/api_yamdb
+git clone https://github.com/qwantilium/foodgram-project-react.git
 ```
-
-```
-cd api_yamdb
-```
-
 Cоздать и активировать виртуальное окружение:
 
 ```
@@ -33,7 +28,7 @@ python3 -m venv venv
 ```
 source venv/bin/activate
 ```
-
+Обновить pip
 ```
 python3 -m pip install --upgrade pip
 ```
@@ -44,18 +39,11 @@ python3 -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-Выполнить миграции:
-
-```
-python3 manage.py migrate
-```
-
-Запустить проект:
-
-```
-python3 manage.py runserver
-```
 ### Запуск приложения в конейнере ТУТОРИАЛ
+Перейти в нужную директорию
+```
+cd foodgram-project-react/infra/
+```
 Создать образ приложения ИЗ КОРНЯ ПРОЕКТА:
 ```
 docker build -t 'название образа' .
@@ -64,7 +52,7 @@ docker build -t 'название образа' .
 ```
 docker-compose up -d
 ```
-Теперь проект доступен по адресу http://127.0.0.1/
+Теперь проект доступен по адресу localhost
 
 Остановить все образы:
 ```
@@ -83,6 +71,14 @@ docker-compose exec backend python manage.py createsuperuser
 Собрать статику
 ```
 docker-compose exec backend  python manage.py collectstatic --no-input 
+```
+Загрузить в базу список ингридентов
+```
+docker-compose exec backend  python manage.py load_csv
+```
+или
+```
+docker-compose exec web python3 manage.py load_json_data
 ```
 Войдите в админку по адресу http://localhost/admin/
 Создайте одну-две записи объектов.

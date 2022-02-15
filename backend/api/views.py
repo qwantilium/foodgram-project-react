@@ -64,7 +64,7 @@ class CustomUserViewSet(UserViewSet):
             user=request.user,
             author=author
         )
-        if subscription:
+        if subscription.exists():
             subscription.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(

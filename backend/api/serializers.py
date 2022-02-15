@@ -2,6 +2,7 @@ from djoser.serializers import UserCreateSerializer, UserSerializer
 from drf_extra_fields.fields import Base64ImageField
 from rest_framework.serializers import (ModelSerializer, ReadOnlyField,
                                         SerializerMethodField, ValidationError)
+from django.db import transaction
 
 from recipes.models import (Favorite, Ingredient, Recipe, RecipeIngredient,
                             ShoppingCart, Subscription, Tag, User)
@@ -120,12 +121,13 @@ class RecipeSerializer(ModelSerializer):
 
     def create_recipe_ingredients(self, ingredients, recipe):
         for i in ingredients:
-            RecipeIngredient.objects.create(
+            RecipeIngredient.objects.bulk_create(
                 recipe=recipe,
                 ingredient_id=i.get('id'),
                 amount=i.get('amount'),
             )
 
+    @transaction.atomic
     def create(self, validated_data):
         ingredients = self.validate_ingredients(
             self.initial_data.get('ingredients')
@@ -141,6 +143,7 @@ class RecipeSerializer(ModelSerializer):
         recipe.tags.set(tags)
         return recipe
 
+    @transaction.atomic
     def update(self, recipe, validated_data):
         ingredients = self.initial_data.get('ingredients')
         tags = self.initial_data.get('tags')
